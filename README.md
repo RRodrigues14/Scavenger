@@ -1,4 +1,6 @@
 # Scavenger
-Unity Scavenger game based on Unity tutorial [2D Roguelike](https://learn.unity.com/project/2d-roguelike-tutorial?uv=5.x).
+Ricardo Rodrigues
 
-Currently configured for Unity 2020.3.
+Scavenger game on Unity.
+
+Description: The game reads 3 .txt files that represents days 1 thorugh 3. It adds tiles accordingly to the char read (x, T, E, F). If the player reach 0 in food, a message of "You starved after ... days" pops up, if he makes to level 4, a message of "You Win" shows up.

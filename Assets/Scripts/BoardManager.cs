@@ -108,12 +108,62 @@ public class BoardManager : MonoBehaviour
     public void SetupScene(int level)
     {
         BoardSetup();
-        InitialiseList();
-        LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
-        LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
+        //InitialiseList();
+        //LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
+        //LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
         int enemyCount = (int)Mathf.Log(level, 2f);
         enemyCount += 5;
-        LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
-        Instantiate(exit, new Vector3(columns - 1, rows - 1, 0f), Quaternion.identity);
+        //LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
+        //Instantiate(exit, new Vector3(columns - 1, rows - 1, 0f), Quaternion.identity);
+        TextAsset levelAsset = (TextAsset)Resources.Load("day1") as TextAsset;
+        switch (level)
+        {
+            case 2:
+                levelAsset = (TextAsset)Resources.Load("day2") as TextAsset;
+                break;
+            case 3:
+                levelAsset = (TextAsset)Resources.Load("day3") as TextAsset;
+                break;
+            default:
+                break;
+        }
+
+        print(levelAsset.text);
+
+        string[] lines = levelAsset.text.Split("\n");
+
+        for (int i=0;i<lines.Length; i++)
+        {
+            print(lines[i]);
+
+            for (int j =0; j<lines[1].Length; j++)
+            {
+                switch (lines[i][j])
+                {
+                    case 'x':
+                        {
+                            GameObject wall = wallTiles[Random.Range(0, wallTiles.Length)];
+                            Instantiate(wall, new Vector3(j - 1, i - 1, 0f), Quaternion.identity);
+                            break;
+                        }
+                    case 'F':
+                        {
+                            GameObject food = foodTiles[Random.Range(0, foodTiles.Length)];
+                            Instantiate(food, new Vector3(j - 1, i - 1, 0f), Quaternion.identity);
+                            break;
+                        }
+                    case 'T':
+                        {
+                            Instantiate(exit, new Vector3(j - 1, i - 1, 0f), Quaternion.identity);
+                            break;
+                        }
+                    case 'E':
+                        {
+                            GameObject enemy = enemyTiles[Random.Range(0, enemyCount)];
+                            Instantiate(enemy, new Vector3(j - 1, i - 1, 0f), Quaternion.identity);
+                        }
+                }
+            }
+        }
     }
 }

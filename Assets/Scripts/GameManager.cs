@@ -133,6 +133,11 @@ public class GameManager : MonoBehaviour
     //GameOver is called when the player reaches 0 food points
     public void GameOver()
     {
+        if (level == 4)
+        {
+            levelText.text = "You Won!";
+        }
+        else
         //Set levelText to display number of levels passed and game over message
         levelText.text = "After " + level + " days, you starved.";
 
